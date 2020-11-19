@@ -9,7 +9,7 @@ module.exports = {
                 res.status(204).json({ message:"There is not task to show!" });
             }else{
                 res.status(200).json({
-                    Tasks:AllTask
+                    AllTask
                 });
             }
         }catch(err){
@@ -30,7 +30,7 @@ module.exports = {
                     res.status(204).json({ message:"There is not task for the specific user to show!" });
                 }else{
                     res.status(200).json({
-                        Tasks:allTaskByUser
+                        allTaskByUser
                     });
                 }
             }

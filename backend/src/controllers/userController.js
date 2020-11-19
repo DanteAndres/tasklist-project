@@ -8,7 +8,7 @@ module.exports = {
                 res.status(204).json({ message:"There is not users to show!" });
             }else{
                 res.status(200).json({
-                    Users:findedUsers
+                    findedUsers
                 });
             }
         }catch(err){
