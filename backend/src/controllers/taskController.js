@@ -9,7 +9,6 @@ module.exports = {
                 res.status(204).json({ message:"There is not task to show!" });
             }else{
                 res.status(200).json({
-                    message:'Tasks found!',
                     Tasks:AllTask
                 });
             }
@@ -31,7 +30,6 @@ module.exports = {
                     res.status(204).json({ message:"There is not task for the specific user to show!" });
                 }else{
                     res.status(200).json({
-                        message:'Tasks found!',
                         Tasks:allTaskByUser
                     });
                 }
@@ -56,7 +54,6 @@ module.exports = {
                 if(taskSaved){
                     res.status(200).json({
                         message:"The task has been created!",
-                        Task:taskSaved
                     });
                 } 
             }catch(err){

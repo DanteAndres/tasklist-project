@@ -8,7 +8,6 @@ module.exports = {
                 res.status(204).json({ message:"There is not users to show!" });
             }else{
                 res.status(200).json({
-                    message:'Users found!',
                     Users:findedUsers
                 });
             }
@@ -28,7 +27,6 @@ module.exports = {
             if(userSaved){
                 res.status(200).json({
                     message:"User has been created sucessfully!",
-                    User: newUser
                 });
             }
         }catch(err){
@@ -43,7 +41,6 @@ module.exports = {
             });
             if(deletedUser){
                 res.status(200).json({ message:"User has been deleted sucessfully." });
-                
             }
         }catch(err){
             res.status(400).json({ message:"Something has failed: "+err.message });
