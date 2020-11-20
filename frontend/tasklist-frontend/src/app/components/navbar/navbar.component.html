@@ -1,0 +1,111 @@
+<mat-toolbar class="docs-navbar-header">
+    <mat-toolbar-row>
+        <h1 class="font-title" style="text-align:center;width:100%">Gestión de Tareas</h1>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="container" style="margin-top:20px;margin-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-title" style="text-align:center;margin-top:10px">
+                    <h4>Crear/Editar Tareas</h4>
+                </div>
+                <div class="card-body">
+                    <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)">
+                        <input type="hidden" name="_id" [(ngModel)]="this.data.newTask._id">
+                        <input type="text" class="form-control" placeholder="Ingrese nombre de la tarea" name="taskname" [(ngModel)]="this.data.newTask.taskname">
+                        <input type="text" class="form-control" placeholder="Ingrese descripción de la tarea" name="description" [(ngModel)]="this.data.newTask.description">
+                        <select name="responsable" id="usuariosRegistrados" style="width:100%" class="form-control" [(ngModel)]="this.data.newTask.responsable">
+                            <option>Seleccione un usuario</option>
+                            <option *ngFor="let us of this.data.userArray" value="{{ us.username }}">{{ us.username }}</option>
+                        </select>
+                        <input type="number" name="priority" class="form-control" placeholder="Ingrese una prioridad" [(ngModel)]="this.data.newTask.priority">
+                        <input type="text" name="tags" class="form-control" placeholder="Ingrese etiquetas" [(ngModel)]="this.data.newTask.tags">
+                        <div style="margin-top: 10px;">
+                            <button name="btn" class="btn btn-block btn-success">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4 style="text-align: center;">Lista de Tareas</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Responsable</th>
+                        <th>Prioridad</th>
+                        <th>Etiquetas</th>
+                        <th>Completada</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of this.data.taskArray">
+                        <td>{{ task.taskname }}</td>
+                        <td>{{ task.description }}</td>
+                        <td>{{ task.responsable }}</td>
+                        <td>{{ task.priority }}</td>
+                        <td>{{ task.tags }}</td>
+                        <td>{{ task.complete }}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" (click)="editTask(task)"><i class="material-icons">edit</i></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteTask(task._id)"><i class="material-icons">delete</i></button>
+                            <button class="btn btn-success btn-sm" (click)="completeTask(task._id)"><i class="material-icons">check_circle</i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-8">
+            <h4 style="text-align: center;">Lista de Usuarios</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Ver Tareas Asignadas</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let us of this.data.userArray">
+                        <td>{{ us.username }}</td>
+                        <td>{{ us.name }}</td>
+                        <td>{{ us.age }}</td>
+                        <td style="display:flex;justify-content:center;">
+                            <button class="btn btn-success btn-sm" (click)="openDialog(us._id)"><i class="material-icons">slideshow</i></button>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" (click)="editUser(us)"><i class="material-icons">edit</i></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteUser(us._id)"><i class="material-icons">delete</i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-title" style="text-align:center;margin-top:10px">
+                    <h4>Crear nuevo Usuario</h4>
+                </div>
+                <div class="card-body">
+                    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+                        <input type="text" name="username" class="form-control" placeholder="Ingrese el username" [(ngModel)]="this.data.newUser.username">
+                        <input type="text" name="name" class="form-control" placeholder="Ingrese nombre" [(ngModel)]="this.data.newUser.name">
+                        <input type="number" name="age" class="form-control" placeholder="Ingrese Edad" [(ngModel)]="this.data.newUser.age">
+                        <div style="margin-top: 10px;">
+                            <button class="btn btn-block btn-success">Crear Usuario</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
