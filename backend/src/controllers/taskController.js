@@ -4,7 +4,7 @@ const User = require('../models/user');
 module.exports = { 
     async getAllTask(req, res){
         try{
-            const AllTask = await Task.find({}).lean();
+            const AllTask = await Task.find();
             if(AllTask == null){
                 res.status(204).json({ message:"There is not task to show!" });
             }else{
@@ -66,13 +66,14 @@ module.exports = {
     },
     async updateOneTask(req, res){
         const { id } = req.params;
-        const { taskname, description, priority } = req.body;
+        const { taskname, description, responsable, priority } = req.body;
         try{
             const updatedTask = await Task.updateOne({
                 _id:id
             },{
                 taskname:taskname,
                 description:description,
+                responsable:responsable,
                 priority:priority
             });
             if(updatedTask['nModified'] != 0){
